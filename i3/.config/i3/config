@@ -26,7 +26,7 @@ font pango:Meslo LGM Nerd Font 10
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 # exec_always --no-startup-id killall polybar
 exec_always --no-startup-id ~/.config/polybar/launch_polybar.sh
-exec_always feh --bg-scale ~/Pictures/bg.jpg
+exec_always feh --bg-scale ~/.local/share/wallapers/ColorAbstract.png
 
 # exec --no-startup-id picom
 exec --no-startup-id dex --autostart --environment i3
