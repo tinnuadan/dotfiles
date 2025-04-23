@@ -1,0 +1,51 @@
+[include]
+	path=.gitlocal
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[init]
+	defaultBranch = main
+[push]
+	default = current
+[pull]
+	rebase = true
+[core]
+	editor = nvim
+[alias]
+	co = checkout
+	cp = cherry-pick
+	cpc = cherry-pick --continue
+	cpa = cherry-pick --abort
+  cpn = cherry-pick --no-commit
+	cm = commit
+	cma = commit --amend
+	cman = commit --amend --no-edit
+	cmm = commit -m
+	cmr = commit --reuse-message=HEAD@{1}
+	cmf = commit --fixup
+	cmfa = commit -a --fixup
+	st = status
+	stnu = status --untracked-files=no
+	d = diff
+	dno = diff --name-only
+	dc = diff --cached
+	dso = !git --no-pager diff --staged --name-only
+	l = log --oneline --graph --decorate --topo-order
+	la = l --all
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	bto = "!git branch --force \"$1\" origin/\"$1\" #"
+	pf = push --force-with-lease
+	pr = pull --rebase
+	pu = push --set-upstream
+	rb = rebase --autostash
+	rbi = rebase --autostash -i
+	rbif = rebase -i --autosquash --autostash
+	rbc = rebase --continue
+	rba = rebase --abort
+	root = rev-parse --show-toplevel
+	rs = reset
+	rsh = reset --hard
+	rss = reset --soft
+	sl = stash list
