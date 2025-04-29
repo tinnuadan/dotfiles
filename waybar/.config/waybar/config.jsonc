@@ -8,7 +8,7 @@
   ],
   "modules-right": [
     "tray",
-    "keybord-state",
+    "keyboard-state",
     "pulseaudio",
     "clock",
     "custom/power"
