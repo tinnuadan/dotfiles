@@ -1,124 +1,106 @@
-@import "mocha.css"; 
+@import "macchiato.css"; 
 
 * {
     font-family: "MesloLGS Nerd Font Mono Bold";
-    font-size: 16px;
+    font-size: 12pt;
     min-height: 0;
-    font-weight: bold;
 }
 
 window#waybar {
-    background: transparent;
-    background-color: @crust;
-		opacity: 0.9;
-    color: @overlay0;
-    transition-property: background-color;
-    transition-duration: 0.1s;
-    border-bottom: 1px solid @overlay1;
+	background-color: rgba(24, 25, 38, 0.5);
+	color: @text;
+  transition-property: background-color;
+  transition-duration: 0.1s;
 }
 
-#window {
-    margin: 8px;
-    padding-left: 8px;
-    padding-right: 8px;
-}
-
-button {
-    box-shadow: inset 0 -3px transparent;
-    border: none;
-    border-radius: 0;
-}
-
-button:hover {
-    background: inherit;
-    color: @sapphire;
-    border-top: 2px solid @sapphire;
+#workspaces {
+	margin-left: 1em;
+	padding: 0em 0.5rem 0em 0.5rem;
+	background-color: @surface0;
+  border-radius: 1rem;
+	opacity: 1.0;
 }
 
 #workspaces button {
-    padding: 0 4px;
-}
-
-#workspaces button.focused {
-    background-color: rgba(0, 0, 0, 0.3);
-    color: @sapphire;
-			border-top: 2px solid @sapphire;
+  color: @lavender;
+  padding: 0.4rem;
+	border-width: 0;
 }
 
 #workspaces button.active {
-    background-color: rgba(0, 0, 0, 0.3);
-    color: @sapphire;
-    border-top: 2px solid @sapphire;
+  color: @sapphire;
+}
+
+#workspaces button:hover {
+  color: @sky;
+	font-weight: bold;
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+	background-color: @red;
 }
 
-#pulseaudio,
-#clock,
-#battery,
-#cpu,
-#memory,
-#disk,
-#temperature,
-#backlight,
-#wireplumber,
-#tray,
-#network,
-#mode,
-#scratchpad,
-#keyboard-state,
-#custom-notification,
-#custom-power {
-  margin-top: 2px;
-  margin-bottom: 2px;
-  margin-left: 4px;
-  margin-right: 4px;
-  padding-left: 4px;
-  padding-right: 4px;
+#window {
+	margin-left: 1em;
+	padding: 0em 1rem 0em 1rem;
+	background-color: @surface0;
+  border-radius: 1rem;
+	opacity: 1.0;
+	color: @sapphire;
 }
 
-#custom-power, #custom-notification {
-	color: @sapphire
+#tray {
+	background-color: @surface0;
+	border-radius: 0.5em;
+	padding: 2px 0.75rem 0 0.75rem;
+	margin-right: 1rem;
 }
 
 #keyboard-state {
-	color: @sapphire
+	background-color: @surface0;
+	border-radius: 0.5em;
+	padding: 0 0.75rem 0 0.75rem;
+	margin-right: 1rem;
 }
 
-#clock {
-    color: @sapphire;
-    /* border-bottom: 2px solid @sapphire; */
+#keyboard-state label.numlock { 
+	color: @mauve;
 }
 
-#clock.date {
-    color: @sapphire;
-    /* border-bottom: 2px solid @sapphire; */
+#keyboard-state label.capslock { 
+	color: @maroon;
+	margin-right: 1rem;
 }
 
 #pulseaudio {
-    color: @sapphire;
-    /* border-bottom: 2px solid @blue; */
+	background-color: @surface0;
+	border-radius: 0.5em 0 0 0.5em;
+	padding: 0 0.5rem 0 0.75rem;
+	color: @sky;
 }
 
-#network {
-    color: @yellow;
-    /* border-bottom: 2px solid @yellow; */
+#clock {
+	background-color: @surface0;
+	border-radius:  0 0.5rem 0.5rem 0;
+	padding: 0 0.75rem 0 0.75rem;
+	margin-right: 1rem;
+	color: @peach;
 }
 
-#idle_inhibitor {
-    margin-right: 12px;
-    color: #7cb342;
+
+#custom-notification {
+	background-color: @surface0;
+	border-radius: 0.5em 0 0 0.5em;
+	padding: 0 0.5rem 0 0.75rem;
+	color: @lavender;
 }
 
-#idle_inhibitor.activated {
-    color: @red;
-}
-
-#battery {
-    color: @green;
-    /* border-bottom: 2px solid @green; */
+#custom-power {
+	background-color: @surface0;
+	border-radius:  0 0.5rem 0.5rem 0;
+	padding: 0 1rem 0 0.75rem;
+	margin-right: 1rem;
+	color: @lavender;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -129,11 +111,4 @@ button:hover {
 /* If workspaces is the rightmost module, omit right margin */
 .modules-right>widget:last-child>#workspaces {
     margin-right: 0;
-}
-
-#custom-vpn {
-    color: @lavender;
-    border-radius: 15px;
-    padding-left: 6px;
-    padding-right: 6px;
 }

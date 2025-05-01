@@ -1,5 +1,6 @@
 {
   "position": "bottom",
+	"height": 24,
   "modules-left": [
     "hyprland/workspaces"
   ],
@@ -9,16 +10,19 @@
   "modules-right": [
     "tray",
     "keyboard-state",
-		"custom/notification",
     "pulseaudio",
     "clock",
+		"custom/notification",
     "custom/power"
   ],
   "reload_style_on_change": true,
   "keyboard-state": {
     "numlock": true,
     "capslock": true,
-    "format": "{name} {icon}",
+    "format": {
+			"numlock": "{icon}",
+			"capslock": "{icon}",
+		},
     "format-icons": {
       "locked": "",
       "unlocked": ""
@@ -26,7 +30,8 @@
   },
   "clock": {
     "interval": 1,
-    "format": "<span foreground='#7dc4e4'>   </span>{:%a %d %H:%M:%S}",
+    // "format": " {%H:%M:%S}",
+    "format": "  {:%H:%M:%S}",
     "tooltip-format": "<tt>{calendar}</tt>",
     "calendar": {
       "weeks-pos": "left",
@@ -39,13 +44,6 @@
         "today": "<span color='#ee99a0'>{}</span>"
       }
     }
-  },
-  "network": {
-    "format-wifi": "<span size='13000' foreground='#f5e0dc'>  </span>{essid}",
-    "format-ethernet": "<span size='13000' foreground='#f5e0dc'>󰤭  </span> Disconnected",
-    "format-linked": "{ifname} (No IP) ",
-    "format-disconnected": "<span size='13000' foreground='#f5e0dc'>  </span>Disconnected",
-    "tooltip-format-wifi": "Signal Strenght: {signalStrength}%"
   },
   "pulseaudio": {
     "format": "{icon}  {volume}%",
@@ -62,7 +60,7 @@
   "tray": {
     "icon-size": 20,
     "show-passive-items": false,
-    "spacing": 4
+    "spacing": 5
   },
   "custom/power": {
     "format": "⏻",
@@ -81,13 +79,13 @@
     "format": "{icon}",
     "format-icons": {
       "notification": "<span foreground='#f38ba8'><sup></sup></span> ",
-      "none": " ",
+      "none": "",
       "dnd-notification": "<span foreground='#f38ba8'><sup></sup></span> ",
-      "dnd-none": " ",
+      "dnd-none": "",
       "inhibited-notification": "<span foreground='#f38ba8'><sup></sup></span> ",
-      "inhibited-none": " ",
+      "inhibited-none": "",
       "dnd-inhibited-notification": "<span foreground='#f38ba8'><sup></sup></span> ",
-      "dnd-inhibited-none": " "
+      "dnd-inhibited-none": ""
     },
     "return-type": "json",
     "exec-if": "which swaync-client",
