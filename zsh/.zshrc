@@ -128,4 +128,4 @@ eval "$(starship init zsh)"
 
 # Remove Ctrl+L to clear screen as it's used in vim motions
 bindkey -r \"^L\"
-bindkey "^;" clear
+bindkey "^;" clear-screen
