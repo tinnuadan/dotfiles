@@ -2,7 +2,8 @@
 
 format = """
 [](mauve)\
-$os\
+$shell\
+$custom\
 $username\
 [](bg:sky fg:mauve)\
 $directory\
@@ -20,7 +21,7 @@ $kotlin\
 $haskell\
 $python\
 [](fg:sapphire bg:lavender)\
-$time\
+$cmd_duration\
 [ ](fg:lavender)\
 $line_break$character"""
 
@@ -210,9 +211,10 @@ format = '[[  $time ](fg:mantle bg:lavender)]($style)'
 
 [cmd_duration]
 disabled = false
-min_tim = 2000
-show_milliseconds = true
-style = 'bold yellow'
+min_time = 500
+show_milliseconds = false
+format = '[[ 󱦟 $duration ](fg:mantle bg:lavender)]($style)'
+style = 'bg:sky'
 
 [line_break]
 disabled = false
@@ -225,3 +227,17 @@ vimcmd_symbol = '[](bold fg:creen)'
 vimcmd_replace_one_symbol = '[](bold fg:lavender)'
 vimcmd_replace_symbol = '[](bold fg:lavender)'
 vimcmd_visual_symbol = '[](bold fg:lavender)'
+
+[shell]
+style = "bg:mauve"
+format = '[[$indicator](fg:base bg:mauve)]($style)'
+bash_indicator=''
+zsh_indicator=''
+disabled = false
+
+[custom.yocto]
+command = "echo $MACHINE"
+when = "test -n \"$MACHINE\""
+style = "bg:mauve"
+format = "[[ {$output}](bold fg:crust bg:mauve)]($style)"
+
