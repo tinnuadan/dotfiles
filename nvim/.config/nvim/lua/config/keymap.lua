@@ -76,6 +76,7 @@ local function printFullPath()
 	print(filepath)
 end
 
+vim.keymap.set("n", "<leader>df", "<cmd>%!clang-format<CR>", { desc = "[D]ocument: clang-[f]ormat", noremap = true })
 vim.keymap.set("n", "<leader>dpc", insertFullPath, { desc = "[D]ocument: [P]ath: [C]opy", noremap = true })
 vim.keymap.set("n", "<leader>dpp", printFullPath, { desc = "[D]ocument: [P]ath: [P]rint", noremap = true })
 
