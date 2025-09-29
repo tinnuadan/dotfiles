@@ -28,7 +28,7 @@ return {
 			{ "nvim-telescope/telescope-ui-select.nvim" },
 
 			-- Useful for getting pretty icons, but requires a Nerd Font.
-			{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
+			{ "nvim-tree/nvim-web-devicons",            enabled = vim.g.have_nerd_font },
 		},
 		config = function()
 			-- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -94,6 +94,7 @@ return {
 			-- Enable Telescope extensions if they are installed
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "ui-select")
+			pcall(require("telescope").load_extension, "vstasks")
 
 			-- See `:help telescope.builtin`
 			local builtin = require("telescope.builtin")
@@ -123,6 +124,16 @@ return {
 			vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "[G]it [C]ommits" })
 			vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "[G]it [B]ranches" })
 			vim.keymap.set("n", "<leader>gs", builtin.git_stash, { desc = "[G]it [S]tash" })
+
+			vim.keymap.set("n", "<leader>ta", require('telescope').extensions.vstask.tasks, { desc = "[T]asks [A]ll" })
+			vim.keymap.set("n", "<leader>ti", require('telescope').extensions.vstask.tasks, { desc = "[T]asks [I]nputs" })
+			vim.keymap.set("n", "<leader>tj", require('telescope').extensions.vstask.tasks, { desc = "[T]asks [J]obs" })
+			vim.keymap.set("n", "<leader>tci", require('telescope').extensions.vstask.tasks,
+				{ desc = "[T]asks [C]lear [I]nputs" })
+			vim.keymap.set("n", "<leader>tcj", require('telescope').extensions.vstask.tasks,
+				{ desc = "[T]asks [C]clear [J]obs" })
+			vim.keymap.set("n", "<leader>tl", require('telescope').extensions.vstask.tasks, { desc = "[T]asks [L]aunch" })
+			vim.keymap.set("n", "<leader>tr", require('telescope').extensions.vstask.tasks, { desc = "[T]asks [R]un" })
 
 			-- Slightly advanced example of overriding default behavior and theme
 			vim.keymap.set("n", "<leader>/", function()
