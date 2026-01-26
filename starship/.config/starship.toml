@@ -2,7 +2,7 @@
 
 format = """
 [](mauve)\
-$shell\
+$os\
 $custom\
 $username\
 [](bg:sky fg:mauve)\
