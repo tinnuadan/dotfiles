@@ -5,6 +5,7 @@ format = """
 $os\
 $custom\
 $username\
+$hostname\
 [](bg:sky fg:mauve)\
 $directory\
 [](fg:sky bg:sapphire)\
@@ -127,6 +128,11 @@ show_always = true
 style_user = "bg:mauve fg:mantle"
 style_root = "bg:mauve fg:mantel"
 format = '[ $user ]($style)'
+
+[hostname]
+ssh_only = true
+style = "bg:mauve fg:mantle"
+format = '[on $hostname ]($style)'
 
 [directory]
 style = "fg:mantle bg:sky"
