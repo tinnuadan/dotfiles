@@ -114,12 +114,15 @@ export EDITOR='nvim'
 
 # Custom aliases
 alias cgrep='grep --include="*.hpp" --include="*.h" --include="*.cpp" --include="*.c"'
+alias kas-container='kas-container --runtime-args "-v ~/tmp/yocto/downloads:/tmp/yocto/downloads -v ~/tmp/yocto/sstate-cache:/tmp/yocto/sstate-cache"'
 
 # Other optional sources
 [[ ! -f ~/.shellrc ]] || source ~/.shellrc
 [[ ! -f ~/.zshrc.add ]] || source ~/.zshrc.add
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh --zsh
+
+[ -f ~/.acme.sh/acme.sh.env ] && source ~/.acme.sh/acme.sh.env
 
 eval "$(starship init zsh)"
 
