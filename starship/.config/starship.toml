@@ -246,5 +246,5 @@ disabled = false
 command = "echo $MACHINE"
 when = "test -n \"$MACHINE\""
 style = "bg:mauve"
-format = "[[ {$output}](bold fg:crust bg:mauve)]($style)"
+format = "[[{$output} ](bold fg:crust bg:mauve)]($style)"
 
