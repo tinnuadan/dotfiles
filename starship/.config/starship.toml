@@ -100,6 +100,7 @@ crust = "#181926"
 [os]
 disabled = false
 style = "bg:mauve fg:mantle"
+format = "[$symbol ]($style)"
 
 [os.symbols]
 Windows = "󰍲"
@@ -124,15 +125,15 @@ Redhat = "󱄛"
 RedHatEnterprise = "󱄛"
 
 [username]
-show_always = true
+# show_always = true
 style_user = "bg:mauve fg:mantle"
 style_root = "bg:mauve fg:mantel"
-format = '[ $user ]($style)'
+format = '[$user]($style)'
 
 [hostname]
 ssh_only = true
 style = "bg:mauve fg:mantle"
-format = '[on $hostname ]($style)'
+format = '[@$hostname ]($style)'
 
 [directory]
 style = "fg:mantle bg:sky"
