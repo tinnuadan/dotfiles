@@ -78,9 +78,39 @@ local function printFullPath()
 	print(filepath)
 end
 
-vim.keymap.set("n", "<leader>df", "<cmd>%!clang-format<CR>", { desc = "[D]ocument: clang-[f]ormat", noremap = true })
+local function clangFormat()
+	if not vim.bo.filetype:match("c") then return end
+	local pos = vim.api.nvim_win_get_cursor(0)
+	vim.cmd("%!clang-format")
+	vim.cmd("write")
+	vim.api.nvim_win_set_cursor(0, pos)
+end
+
+local function quotes_to_angles()
+	if not vim.bo.filetype:match("c") then return end
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	vim.cmd([[%s/#include\s\+"\([^"]\+\)"/#include <\1>/ge]])
+	vim.api.nvim_win_set_cursor(0, { row, col })
+end
+
+local function qt_includes_to_canonical()
+	if not vim.bo.filetype:match("c") then return end
+
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+
+	vim.cmd([[
+    %s/#include\s\+<\([a-z][a-zA-Z0-9_]*\)\.h>/#include <\u\1>/ge
+  ]])
+
+	vim.api.nvim_win_set_cursor(0, { row, col })
+end
+
+
+vim.keymap.set("n", "<leader>df", clangFormat, { desc = "[D]ocument: clang-[f]ormat", noremap = true })
 vim.keymap.set("n", "<leader>dpc", insertFullPath, { desc = "[D]ocument: [P]ath: [C]opy", noremap = true })
 vim.keymap.set("n", "<leader>dpp", printFullPath, { desc = "[D]ocument: [P]ath: [P]rint", noremap = true })
+vim.keymap.set("n", "<leader>cf", quotes_to_angles, { desc = "[C]ode: [F]ix includes", noremap = true })
+vim.keymap.set("n", "<leader>cq", qt_includes_to_canonical, { desc = "[C]ode: Fix [q]t includes", noremap = true })
 
 -- Append before last character if line ends with ;
 local function appendAtEndOfLine()
