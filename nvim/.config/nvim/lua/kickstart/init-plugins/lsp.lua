@@ -62,7 +62,8 @@ return {
 
 				if vim.lsp.inlay_hint and client.supports_method('textDocument/inlayHint') then
 					map('<leader>th', function()
-						vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled(bufnr))
+						local enabled = vim.lsp.inlay_hint.is_enabled(bufnr)
+						vim.lsp.inlay_hint.enable(bufnr, { enabled = not enabled })
 					end, '[T]oggle Inlay [H]ints')
 				end
 
@@ -83,9 +84,9 @@ return {
 
 			-- Built-in LSP server definitions
 			vim.lsp.config('clangd', {
-				cmd = { 'clangd', '--pretty', '--clang-tidy', '--log=verbose' },
+				cmd = { os.getenv('CLANGD_PATH') or 'clangd', '--pretty', '--clang-tidy' },
 				init_options = {
-					fallbackFlags = { '-std=c++17' },
+					fallbackFlags = { '-std=c++23' },
 				},
 				filetypes = { "cpp", "c" },
 				capabilities = capabilities,
