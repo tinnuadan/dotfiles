@@ -60,6 +60,8 @@ vim.keymap.set("n", "gl", "$", { desc = "End of line" })
 vim.keymap.set("n", "n", "<Nop>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-n>", "n", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-p>", "N", { noremap = true, silent = true })
+-- Remap 'Ctlr+U' in insert mode so that I don't undo stuff accidentally
+vim.keymap.set("i", "<C-u>", "<Nop>", { noremap = true, silent = true })
 
 local function getFullPath()
 	local filepath = vim.fn.expand("%")
