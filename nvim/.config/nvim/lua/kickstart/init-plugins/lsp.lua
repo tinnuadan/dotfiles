@@ -11,15 +11,14 @@ return {
 	},
 
 	{
-		-- Built-in LSP setup (NO nvim-lspconfig)
-		'hrsh7th/cmp-nvim-lsp',
+		'neovim/nvim-lspconfig',
 		dependencies = {
+			-- lsp status
 			{ 'j-hui/fidget.nvim', opts = {} },
 		},
 		config = function()
 			local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-			-- Diagnostics (unchanged)
 			vim.diagnostic.config {
 				severity_sort = true,
 				float = { border = 'rounded', source = 'if_many' },
@@ -41,8 +40,7 @@ return {
 				},
 			}
 
-			-- on_attach (unchanged)
-			local on_attach = function(client, bufnr)
+			local common_on_attach = function(client, bufnr)
 				local map = function(keys, func, desc, mode)
 					mode = mode or 'n'
 					vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = 'LSP: ' .. desc })
@@ -51,7 +49,6 @@ return {
 				map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
 				map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 				map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-				map('go', '<cmd>ClangdSwitchSourceHeader<CR>', '[G]oto Header/Source')
 				map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
 				map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
 				map('<leader>fs', require('telescope.builtin').lsp_document_symbols, '[F]ind [S]ymbols')
@@ -82,6 +79,16 @@ return {
 				end
 			end
 
+			local on_attach_clangd_default = (vim.lsp.config['clangd'] or {}).on_attach
+			local on_attach_clangd = function(client, bufnr)
+				local map = function(keys, func, desc, mode)
+					mode = mode or 'n'
+					vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = 'LSP: ' .. desc })
+				end
+				common_on_attach(client, bufnr)
+				map('go', '<cmd>LspClangdSwitchSourceHeader<CR>', '[G]oto Header/Source')
+			end
+
 			-- Built-in LSP server definitions
 			vim.lsp.config('clangd', {
 				cmd = { os.getenv('CLANGD_PATH') or 'clangd', '--pretty', '--clang-tidy' },
@@ -90,7 +97,10 @@ return {
 				},
 				filetypes = { "cpp", "c" },
 				capabilities = capabilities,
-				on_attach = on_attach,
+				on_attach = {
+					on_attach_clangd_default,
+					on_attach_clangd,
+				}
 			})
 			vim.lsp.enable('clangd')
 
@@ -102,7 +112,7 @@ return {
 				root_markers = { "Cargo.toml", ".git" },
 				filetypes = { "rust" },
 				capabilities = capabilities,
-				on_attach = on_attach,
+				on_attach = common_on_attach,
 				before_init = function(init_params, config)
 					-- See https://github.com/rust-lang/rust-analyzer/blob/eb5da56d839ae0a9e9f50774fa3eb78eb0964550/docs/dev/lsp-extensions.md?plain=1#L26
 					if config.settings and config.settings['rust-analyzer'] then
@@ -125,22 +135,10 @@ return {
 				root_markers = { { '.luarc.json', '.luarc.jsonc' }, '.git' },
 			})
 			vim.lsp.enable('lua_ls')
-
-			-- 🚀 Start servers automatically
-			-- vim.api.nvim_create_autocmd('FileType', {
-			-- 	callback = function(args)
-			-- 		local ft = args.match
-			-- 		if ft == 'c' or ft == 'cpp' then
-			-- 			vim.lsp.start { name = 'clangd' }
-			-- 		elseif ft == 'lua' then
-			-- 			vim.lsp.start { name = 'lua_ls' }
-			-- 		end
-			-- 	end,
-			-- })
 		end,
 	},
 
-	-- Formatter (unchanged)
+	-- Formatter
 	{
 		'stevearc/conform.nvim',
 		event = { 'BufWritePre' },
@@ -170,7 +168,7 @@ return {
 		},
 	},
 
-	-- CMP (unchanged)
+	-- CMP
 	{
 		'hrsh7th/nvim-cmp',
 		event = 'InsertEnter',
