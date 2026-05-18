@@ -10,7 +10,7 @@
   "modules-right": [
     "tray",
     "keyboard-state",
-		"network",
+		"custom/network",
     "pulseaudio",
     "clock",
 		"custom/notification",
@@ -61,6 +61,12 @@
 	"network": {
 		"interval": 1,
 		"format": "🖧 ⇩{bandwidthDownBytes} ⇧{bandwidthUpBytes}",
+		"justify": "center",
+		"align": 0.0
+	},
+	"custom/network": {
+		"interval": 1,
+		"exec" : "~/.local/bin/wb-network",
 		"justify": "center",
 		"align": 0.0
 	},
