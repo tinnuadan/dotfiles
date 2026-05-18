@@ -57,14 +57,14 @@ return {
 				map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
 				map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
-				if vim.lsp.inlay_hint and client.supports_method('textDocument/inlayHint') then
+				if vim.lsp.inlay_hint and client:supports_method('textDocument/inlayHint') then
 					map('<leader>th', function()
 						local enabled = vim.lsp.inlay_hint.is_enabled(bufnr)
 						vim.lsp.inlay_hint.enable(bufnr, { enabled = not enabled })
 					end, '[T]oggle Inlay [H]ints')
 				end
 
-				if client.supports_method('textDocument/documentHighlight') then
+				if client:supports_method('textDocument/documentHighlight') then
 					local group = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
 					vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
 						group = group,
