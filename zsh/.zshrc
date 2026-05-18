@@ -97,6 +97,7 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='nvim'
 # fi
 export EDITOR='nvim'
+export SYSTEMD_EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
@@ -116,6 +117,7 @@ export EDITOR='nvim'
 # Custom aliases
 alias cgrep='grep --include="*.hpp" --include="*.h" --include="*.cpp" --include="*.c"'
 alias kas-container='kas-container --runtime-args "-v ~/tmp/yocto/downloads:/tmp/yocto/downloads -v ~/tmp/yocto/sstate-cache:/tmp/yocto/sstate-cache"'
+alias icat='kitty +kitten icat'
 
 # Other optional sources
 [[ ! -f ~/.shellrc ]] || source ~/.shellrc
