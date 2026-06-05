@@ -1,0 +1,5 @@
+module res
+singleton Macchiato 1.0 Macchiato.qml
+singleton GlobalFont 1.0 GlobalFont.qml
+singleton GlobalColors 1.0 GlobalColors.qml
+singleton Settings 1.0 Settings.qml
