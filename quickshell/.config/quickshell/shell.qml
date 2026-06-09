@@ -7,7 +7,6 @@ import Quickshell
 import Quickshell.Wayland
 
 ShellRoot {
-
     PanelWindow {
         id: panel
 
@@ -16,65 +15,86 @@ ShellRoot {
         anchors.left: true
         anchors.right: true
         implicitHeight: Settings.panelHeight
-        color: Qt.rgba(54 / 255, 58 / 255, 79 / 255, 0.7)
+        color: GlobalColors.transparentBackground
 
-        RowLayout {
-            id: leftItems
+        Item { // Container for panel content, used for mapping menu positions as PanelWindow is not a QQuickItem
+            id: panelContent
 
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.left: parent.left
-            anchors.leftMargin: 10
+            anchors.fill: parent
 
-            Workspaces {
-                id: workspaces
-            }
+            RowLayout {
+                id: leftItems
 
-        }
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: parent.left
+                anchors.leftMargin: 10
 
-        ActiveWindow {
-            id: activeWindow
-
-            anchors.centerIn: parent
-        }
-
-        RowLayout {
-            id: rightItems
-
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.right: parent.right
-            anchors.rightMargin: 10
-            spacing: 15
-
-            Clock {
-                id: clock
-                onClicked: {
-                    var x = mapToGlobal(Qt.point(0, clock.height)).x;
-                    var y = panel.height;
-                    calendarContent.open(x, y);
+                Workspaces {
+                    id: workspaces
                 }
+
             }
 
-            MenuButton {
-                id: powerMenuButton
+            ActiveWindow {
+                id: activeWindow
 
-                text: "󰐥 "
-                onClicked: {
-                    var x = mapToGlobal(Qt.point(0, powerMenuButton.height)).x;
-                    var y = panel.height; //mapToGlobal(Qt.point(0, panel.height)).y;
-                    console.log("Opening menu at: " + x + ", " + y);
-                    powerMenuContent.open(x, y);
+                anchors.centerIn: parent
+            }
+
+            RowLayout {
+                id: rightItems
+
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+                anchors.rightMargin: 10
+                spacing: 15
+
+                MenuButton {
+                    id: powerControlCenterButton
+
+                    text: " "
+                    onClicked: {
+                        var x = powerControlCenterButton.mapToItem(panelContent, 0, 0).x;
+                        var y = panelContent.height;
+                        powerMenuContent.open(x, y);
+                    }
                 }
+
+                Clock {
+                    id: clock
+
+                    onClicked: {
+                        var x = clock.mapToItem(panelContent, 0, 0).x;
+                        var y = panelContent.height;
+                        calendarContent.open(x, y);
+                    }
+                }
+
+                MenuButton {
+                    id: powerMenuButton
+
+                    text: "󰐥 "
+                    onClicked: {
+                        var x = powerMenuButton.mapToItem(panelContent, 0, 0).x;
+                        var y = panelContent.height;
+                        powerMenuContent.open(x, y);
+                    }
+                }
+
             }
-        }
 
-        PowerMenu {
-            id: powerMenuContent
-            anchor.window: panel
-        }
+            PowerMenu {
+                id: powerMenuContent
 
-        Calendar {
-            id: calendarContent
-            anchor.window: panel
+                anchor.window: panel
+            }
+
+            Calendar {
+                id: calendarContent
+
+                anchor.window: panel
+            }
+
         }
 
     }

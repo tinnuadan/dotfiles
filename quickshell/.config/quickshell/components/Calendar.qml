@@ -6,8 +6,8 @@ import QtQuick.Layouts
 MenuBase {
     id: calendar
 
-    width: 400
-    height: 250
+    implicitWidth: 400
+    implicitHeight: 250
 
     function getISOWeek(date) {
         var d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));

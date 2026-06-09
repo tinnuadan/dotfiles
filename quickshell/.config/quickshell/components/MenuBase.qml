@@ -6,6 +6,7 @@ PopupWindow {
     id: menuBase
 
     function open(x, y) {
+        console.log("Opening menu at: " + x + ", " + y);
         anchor.rect.x = x;
         anchor.rect.y = y;
         menuBase.visible = true;

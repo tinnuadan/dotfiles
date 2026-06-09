@@ -2,11 +2,12 @@ import "."
 import "../res"
 import QtQuick
 import QtQuick.Layouts
+import Quickshell.Hyprland
 
 MenuBase {
     id: powerMenu
 
-    width: 200
+    implicitWidth: 200
 
     Item {
         id: rect
@@ -19,10 +20,10 @@ MenuBase {
             spacing: 5
 
             MenuButton {
-                // Hyprland.dispatch("hyprctl shutdown")
 
                 text: "󰐥  Shutdown"
                 onClicked: {
+                Hyprland.dispatch("poweroff")
                 }
             }
 
