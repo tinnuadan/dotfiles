@@ -8,6 +8,7 @@ RowLayout {
   Repeater {
     model: Hyprland.workspaces
     delegate: Text {
+      visible: modelData.monitor !== null && modelData.monitor.name === panel.screen.name
       property bool hovered: false
       text: modelData.name
       color: {

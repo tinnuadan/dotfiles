@@ -7,92 +7,107 @@ import Quickshell
 import Quickshell.Wayland
 
 ShellRoot {
-    PanelWindow {
-        id: panel
+    Variants {
+        model: Quickshell.screens
 
-        anchors.top: Settings.panelIsAtTop
-        anchors.bottom: !Settings.panelIsAtTop
-        anchors.left: true
-        anchors.right: true
-        implicitHeight: Settings.panelHeight
-        color: GlobalColors.transparentBackground
+        PanelWindow {
+            id: panel
 
-        Item { // Container for panel content, used for mapping menu positions as PanelWindow is not a QQuickItem
-            id: panelContent
+            required property var modelData
 
-            anchors.fill: parent
+            screen: modelData
+            anchors.top: Settings.panelIsAtTop
+            anchors.bottom: !Settings.panelIsAtTop
+            anchors.left: true
+            anchors.right: true
+            implicitHeight: Settings.panelHeight
+            color: GlobalColors.transparentBackground
 
-            RowLayout {
-                id: leftItems
+            // Container for panel content, used for mapping menu positions as PanelWindow is not a QQuickItem
+            Item {
+                id: panelContent
 
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.left: parent.left
-                anchors.leftMargin: 10
-
-                Workspaces {
-                    id: workspaces
+                function calculateMenuPosition(button) {
+                    var x = button.mapToItem(panelContent, 0, 0).x;
+                    var y = Settings.panelIsAtTop ? panelContent.height : 0;
+                    return {
+                        "x": x,
+                        "y": y
+                    };
                 }
 
-            }
+                anchors.fill: parent
 
-            ActiveWindow {
-                id: activeWindow
+                RowLayout {
+                    id: leftItems
 
-                anchors.centerIn: parent
-            }
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: parent.left
+                    anchors.leftMargin: 10
 
-            RowLayout {
-                id: rightItems
-
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.right: parent.right
-                anchors.rightMargin: 10
-                spacing: 15
-
-                MenuButton {
-                    id: powerControlCenterButton
-
-                    text: " "
-                    onClicked: {
-                        var x = powerControlCenterButton.mapToItem(panelContent, 0, 0).x;
-                        var y = panelContent.height;
-                        powerMenuContent.open(x, y);
+                    Workspaces {
+                        id: workspaces
                     }
+
                 }
 
-                Clock {
-                    id: clock
+                ActiveWindow {
+                    id: activeWindow
 
-                    onClicked: {
-                        var x = clock.mapToItem(panelContent, 0, 0).x;
-                        var y = panelContent.height;
-                        calendarContent.open(x, y);
+                    anchors.centerIn: parent
+                }
+
+                RowLayout {
+                    id: rightItems
+
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.right: parent.right
+                    anchors.rightMargin: 10
+                    spacing: 15
+
+                    MenuButton {
+                        id: powerControlCenterButton
+
+                        text: " "
+                        onClicked: {
+                            var pos = panelContent.calculateMenuPosition(powerControlCenterButton);
+                            powerMenuContent.open(pos.x, pos.y);
+                        }
                     }
-                }
 
-                MenuButton {
-                    id: powerMenuButton
+                    Clock {
+                        id: clock
 
-                    text: "󰐥 "
-                    onClicked: {
-                        var x = powerMenuButton.mapToItem(panelContent, 0, 0).x;
-                        var y = panelContent.height;
-                        powerMenuContent.open(x, y);
+                        onClicked: {
+                            var pos = panelContent.calculateMenuPosition(clock);
+                            calendarContent.open(pos.x, pos.y);
+                        }
                     }
+
+                    MenuButton {
+                        id: powerMenuButton
+
+                        text: "󰐥 "
+                        onClicked: {
+                            var pos = panelContent.calculateMenuPosition(powerMenuButton);
+                            powerMenuContent.open(pos.x, pos.y);
+                        }
+                    }
+
                 }
 
-            }
+                PowerMenu {
+                    id: powerMenuContent
 
-            PowerMenu {
-                id: powerMenuContent
+                    anchor.window: panel
+                }
 
-                anchor.window: panel
-            }
+                Calendar {
+                    id: calendarContent
 
-            Calendar {
-                id: calendarContent
+                    anchor.window: panel
+                }
 
-                anchor.window: panel
             }
 
         }

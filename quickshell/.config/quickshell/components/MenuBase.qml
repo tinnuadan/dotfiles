@@ -7,14 +7,14 @@ PopupWindow {
 
     function open(x, y) {
         anchor.rect.x = x;
-        anchor.rect.y = y;
-        slideTranslate.y = -menuBase.height;
+        anchor.rect.y = y - (Settings.panelIsAtTop ? menuBase.height : 0);
+        slideTranslate.y = Settings.panelIsAtTop ? -menuBase.height : menuBase.height;
         menuBase.visible = true;
         openAnim.start();
     }
 
     function close() {
-        closeAnim.to = -menuBase.height;
+        closeAnim.to = Settings.panelIsAtTop ? -menuBase.height : menuBase.height;
         closeAnim.start();
     }
 
@@ -22,8 +22,11 @@ PopupWindow {
     anchor.window: panel
     anchor.rect.x: parentWindow.width / 2 - width / 2
     anchor.rect.y: parentWindow.height
+    anchor.edges: Settings.panelIsAtTop ? Edges.Bottom : Edges.Top
+    anchor.gravity: Settings.panelIsAtTop ? Edges.Bottom : Edges.Top
     visible: false
     grabFocus: true
+    
 
     Item {
         id: contentWrapper
