@@ -68,13 +68,23 @@ PopupWindow {
             ctx.reset();
             var r = 10;
             ctx.beginPath();
-            ctx.moveTo(0, 0);
-            ctx.lineTo(width, 0);
-            ctx.lineTo(width, height - r);
-            ctx.arcTo(width, height, width - r, height, r);
-            ctx.lineTo(r, height);
-            ctx.arcTo(0, height, 0, height - r, r);
-            ctx.lineTo(0, 0);
+            if (Settings.panelIsAtTop) {
+                // rounded bottom corners
+                ctx.moveTo(0, 0);
+                ctx.lineTo(width, 0);
+                ctx.lineTo(width, height - r);
+                ctx.arcTo(width, height, width - r, height, r);
+                ctx.lineTo(r, height);
+                ctx.arcTo(0, height, 0, height - r, r);
+            } else {
+                // rounded top corners
+                ctx.moveTo(0, r);
+                ctx.arcTo(0, 0, r, 0, r);
+                ctx.lineTo(width - r, 0);
+                ctx.arcTo(width, 0, width, r, r);
+                ctx.lineTo(width, height);
+                ctx.lineTo(0, height);
+            }
             ctx.closePath();
             ctx.fillStyle = bgColor;
             ctx.fill();
