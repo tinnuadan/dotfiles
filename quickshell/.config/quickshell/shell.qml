@@ -65,14 +65,8 @@ ShellRoot {
                     anchors.rightMargin: 10
                     spacing: 15
 
-                    MenuButton {
+                    AudioControl {
                         id: powerControlCenterButton
-
-                        text: " "
-                        onClicked: {
-                            var pos = panelContent.calculateMenuPosition(powerControlCenterButton);
-                            powerMenuContent.open(pos.x, pos.y);
-                        }
                     }
 
                     Clock {
