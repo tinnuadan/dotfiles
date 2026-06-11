@@ -2,15 +2,24 @@ import "."
 import "../res"
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 import Quickshell.Hyprland
+import Quickshell.Io
 
 MenuBase {
     id: powerMenu
 
     implicitWidth: 200
 
+    Process {
+        id: powerProcess
+
+        running: false
+    }
+
     Item {
         id: rect
+
         anchors.fill: parent
         anchors.margins: 10
 
@@ -20,10 +29,10 @@ MenuBase {
             spacing: 5
 
             MenuButton {
-
                 text: "󰐥  Shutdown"
                 onClicked: {
-                Hyprland.dispatch("poweroff")
+                    powerProcess.command = ["systemctl", "poweroff"];
+                    powerProcess.running = true;
                 }
             }
 
