@@ -1,0 +1,9 @@
+module components
+ActiveWindow 1.0 ActiveWindow.qml
+Workspaces 1.0 Workspaces.qml
+Clock 1.0 Clock.qml
+MenuButton 1.0 MenuButton.qml
+PowerMenu 1.0 PowerMenu.qml
+MenuBase 1.0 MenuBase.qml
+Calendar 1.0 Calendar.qml
+AudioControl 1.0 AudioControl.qml
