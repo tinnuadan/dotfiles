@@ -22,6 +22,7 @@ $kotlin\
 $haskell\
 $python\
 [](fg:sapphire bg:lavender)\
+$time\
 $cmd_duration\
 [ ](fg:lavender)\
 $line_break$character"""
