@@ -66,7 +66,7 @@ hl.config({
 
 		-- Change transparency of focused and unfocused windows
 		active_opacity   = 1.0,
-		inactive_opacity = 0.9,
+		inactive_opacity = 1.0,
 
 		shadow           = {
 			enabled      = true,
@@ -171,13 +171,13 @@ local mainMod = "SUPER"
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
-hl.bind("CTRL + L", hl.dsp.exec_cmd("hyprlock"))
+-- hl.bind("CTRL + L", hl.dsp.exec_cmd("hyprlock"))
 
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo)         --({ action = "toggle" }))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + T", hl.dsp.layout("togglesplit")) -- dwindle only
-hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle", mode = "maximized" }))
 
 -- move focus
 hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
