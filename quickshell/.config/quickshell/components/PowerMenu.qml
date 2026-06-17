@@ -25,7 +25,6 @@ MenuBase {
 
         ColumnLayout {
             anchors.fill: parent
-            // anchors.pa
             spacing: 5
 
             MenuButton {
@@ -37,10 +36,10 @@ MenuBase {
             }
 
             MenuButton {
-                // Hyprland.dispatch("hyprctl reload")
-
                 text: "  Restart"
                 onClicked: {
+                    powerProcess.command = ["systemctl", "reboot"];
+                    powerProcess.running = true;
                 }
             }
 

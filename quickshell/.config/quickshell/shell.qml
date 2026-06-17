@@ -1,3 +1,5 @@
+//@ pragma UseQApplication
+
 import "./components"
 import "./res"
 import QtQuick
@@ -64,6 +66,10 @@ ShellRoot {
                     anchors.right: parent.right
                     anchors.rightMargin: 10
                     spacing: 15
+
+                    SysTray {
+                        id: sysTray
+                    }
 
                     AudioControl {
                         id: powerControlCenterButton
