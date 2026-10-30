@@ -29,6 +29,7 @@ hl.monitor({
 local terminal = "kitty"
 local fileManager = "dolphin"
 local menu = "yofi"
+local webBrowser = "zen"
 
 -- Autostart
 hl.on("hyprland.start", function()
@@ -171,6 +172,7 @@ local mainMod = "SUPER"
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(webBrowser))
 -- hl.bind("CTRL + L", hl.dsp.exec_cmd("hyprlock"))
 
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
