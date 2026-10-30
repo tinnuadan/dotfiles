@@ -174,7 +174,7 @@ hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 -- hl.bind("CTRL + L", hl.dsp.exec_cmd("hyprlock"))
 
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
-hl.bind(mainMod .. " + P", hl.dsp.window.pseudo)         --({ action = "toggle" }))
+hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())       --({ action = "toggle" }))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + T", hl.dsp.layout("togglesplit")) -- dwindle only
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle", mode = "maximized" }))
