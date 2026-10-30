@@ -266,6 +266,8 @@ hl.window_rule({ name = "MSTeamsStartup", match = { title = "^Waiting for networ
 hl.window_rule({ name = "Discord", match = { title = "Discord" }, workspace = "10" })
 hl.window_rule({ name = "Cider", match = { title = "Cider" }, workspace = "10" })
 
+hl.window_rule({ name = "HyprlandPlaceholder", match = { title = "HyprlandPlaceholder" }, opacity = "0.1", no_blur = true })
+
 hl.window_rule({ name = "ActiveFullscreen", match = { fullscreen = true, focus = true }, border_color = catpuccin.red })
 hl.window_rule({
 	name = "InactiveFullscreen",
