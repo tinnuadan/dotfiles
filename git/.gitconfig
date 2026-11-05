@@ -26,6 +26,7 @@
 	cmr = commit --reuse-message=HEAD@{1}
 	cmf = commit --fixup
 	cmfa = commit -a --fixup
+	f = fetch
 	st = status
 	stnu = status --untracked-files=no
 	d = diff
