@@ -56,11 +56,14 @@ return {
 				-- You can put your default mappings / updates / etc. in here
 				--  All the info you're looking for is in `:help telescope.setup()`
 				--
-				-- defaults = {
-				--   mappings = {
-				--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-				--   },
-				-- },
+				defaults = {
+					--   mappings = {
+					--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+					--   },
+					file_ignore_patterns = {
+						"graphify%-out"
+					},
+				},
 				-- defaults = {
 				-- 	layout_strategy = "flex",
 				-- 	layout_config = {
