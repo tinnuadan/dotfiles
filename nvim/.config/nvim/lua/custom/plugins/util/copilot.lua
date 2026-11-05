@@ -1,6 +1,12 @@
 return {
-	"github/copilot.vim",
+	"zbirenbaum/copilot.lua",
+	dependencies = {
+		"copilotlsp-nvim/copilot-lsp",
+	},
+	cmd = "Copiplot",
+	event = "InsertEnter",
 	config = function()
+		require("copilot").setup({})
 		CopilotDisabled = true
 		local cp_toggle = function()
 			CopilotDisabled = not CopilotDisabled
@@ -10,7 +16,7 @@ return {
 				vim.cmd("Copilot enable")
 			end
 		end
-		vim.cmd("Copilot disable")
+		-- vim.cmd("Copilot disable")
 		vim.keymap.set("n", "<leader>cs", "<cmd>Copilot status<CR>", { desc = "[C]opilot: [S]tatus", noremap = true })
 		vim.keymap.set("n", "<leader>ct", cp_toggle, { desc = "[C]opilot: [T]oggle", noremap = true })
 	end

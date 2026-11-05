@@ -135,6 +135,8 @@ return {
 				root_markers = { { '.luarc.json', '.luarc.jsonc' }, '.git' },
 			})
 			vim.lsp.enable('lua_ls')
+
+			vim.lsp.enable('copilot')
 		end,
 	},
 
